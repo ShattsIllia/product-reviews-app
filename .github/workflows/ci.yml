@@ -1,8 +1,6 @@
-name: CI
+name: Checks
 
 on:
-  push:
-    branches: ["**"]
   pull_request:
 
 concurrency:
@@ -10,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test-and-e2e:
+  test:
     runs-on: ubuntu-latest
 
     services:
@@ -45,12 +43,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "pnpm"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: "8"
+          version: "9"
           run_install: false
 
       - name: Install dependencies

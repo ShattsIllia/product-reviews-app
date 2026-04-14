@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { baseURL, register, login } from './_utils';
 
 test.describe('Auth (E2E)', () => {
-    test('register → logout → login', async ({ page }) => {
+    test('register → login → logout → login', async ({ page }) => {
         const unique = Date.now();
         const user = {
             email: `e2e-${unique}@example.com`,
@@ -11,6 +11,7 @@ test.describe('Auth (E2E)', () => {
         };
 
         await register(page, user);
+        await login(page, user);
 
         await page.click('[data-testid="user-menu"]');
         await page.click('button[role="menuitem"]:has-text("Logout")');

@@ -61,6 +61,14 @@ else
     log_success ".env already exists"
 fi
 
+# Backend uses root .env (single source of truth).
+# Prisma CLI reads env from the current package folder, so we create a symlink for convenience.
+if [ ! -e apps/backend/.env ]; then
+    log_info "Linking apps/backend/.env to root .env..."
+    ln -s ../../.env apps/backend/.env
+    log_success "apps/backend/.env linked"
+fi
+
 # Start Docker containers
 log_info "Starting Docker containers..."
 docker-compose up -d
@@ -94,7 +102,6 @@ echo "  Backend:   http://localhost:3000"
 echo "  Database:  http://localhost:5432"
 echo ""
 echo "Demo credentials:"
-echo "  Admin:  admin@example.com / admin123"
 echo "  User1:  user1@example.com / password123"
 echo "  User2:  user2@example.com / password123"
 echo ""

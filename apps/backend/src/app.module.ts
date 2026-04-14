@@ -9,7 +9,8 @@ import { ReviewsModule } from './features/reviews/reviews.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: ['.env', '.env.local'],
+      // Single source of truth: root .env
+      envFilePath: ['../../.env'],
       isGlobal: true,
     }),
     DatabaseModule,

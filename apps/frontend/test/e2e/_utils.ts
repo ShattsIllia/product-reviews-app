@@ -15,8 +15,9 @@ export async function register(page: Page, user: { email: string; password: stri
     await page.fill('input[formControlName="password"]', user.password);
     await page.fill('input[formControlName="confirmPassword"]', user.password);
     await page.click('button[type="submit"]');
-    await expect(page).toHaveURL(`${baseURL}/products`);
-    await expectSnackBar(page, 'Registration successful');
+    // Registration does not log in. It redirects to login page.
+    await expect(page).toHaveURL(`${baseURL}/auth/login`);
+    await expectSnackBar(page, 'Registration successful!');
 }
 
 export async function login(page: Page, user: { email: string; password: string }) {
@@ -25,7 +26,7 @@ export async function login(page: Page, user: { email: string; password: string 
     await page.fill('input[formControlName="password"]', user.password);
     await page.click('button[type="submit"]');
     await expect(page).toHaveURL(`${baseURL}/products`);
-    await expectSnackBar(page, 'Sign in successful');
+    await expectSnackBar(page, 'Sign in successful!');
 }
 
 export async function openFirstProduct(page: Page) {

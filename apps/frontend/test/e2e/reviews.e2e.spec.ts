@@ -11,6 +11,7 @@ test.describe('Reviews (E2E)', () => {
         };
 
         await register(page, user);
+        await login(page, user);
 
         // ensure session works after relogin
         await page.click('[data-testid="user-menu"]');

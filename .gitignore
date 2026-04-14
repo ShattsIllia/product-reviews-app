@@ -19,6 +19,8 @@ coverage
 .angular/cache
 .angular/cache/**
 .env.local
+**/.angular/cache/
+**/.angular/cache/**
 .env.test
 .env.prod
 .env
