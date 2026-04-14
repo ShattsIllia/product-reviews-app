@@ -16,6 +16,8 @@ coverage
 **/test-results/**
 /playwright-report
 **/playwright-report/**
+.angular/cache
+.angular/cache/**
 .env.local
 .env.test
 .env.prod
