@@ -16,10 +16,10 @@
     "type-check": "tsc --noEmit && tsc --noEmit -p tsconfig.prisma.json",
     "clean": "rm -rf dist node_modules",
     "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev",
-    "prisma:deploy": "prisma migrate deploy",
+    "prisma:migrate": "dotenv -e ../../.env -- prisma migrate dev",
+    "prisma:deploy": "dotenv -e ../../.env -- prisma migrate deploy",
     "prisma:seed": "node --import tsx prisma/seed.ts",
-    "prisma:studio": "prisma studio",
+    "prisma:studio": "dotenv -e ../../.env -- prisma studio",
     "postinstall": "prisma generate"
   },
   "dependencies": {
@@ -57,6 +57,7 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^10.1.8",
     "jest": "^29.7.0",
+    "dotenv-cli": "^8.0.0",
     "prettier": "^3.1.1",
     "prisma": "^5.8.0",
     "supertest": "^6.3.3",
