@@ -15,10 +15,10 @@
     "format:check": "prettier --check \"src/**/*.ts\"",
     "type-check": "tsc --noEmit && tsc --noEmit -p tsconfig.prisma.json",
     "clean": "rm -rf dist node_modules",
-    "prisma:generate": "prisma generate",
+    "prisma:generate": "dotenv -e ../../.env -- prisma generate",
     "prisma:migrate": "dotenv -e ../../.env -- prisma migrate dev",
     "prisma:deploy": "dotenv -e ../../.env -- prisma migrate deploy",
-    "prisma:seed": "node --import tsx prisma/seed.ts",
+    "prisma:seed": "dotenv -e ../../.env -- node --import tsx prisma/seed.ts",
     "prisma:studio": "dotenv -e ../../.env -- prisma studio",
     "postinstall": "prisma generate"
   },

@@ -116,7 +116,7 @@ cp .env.example .env
 docker-compose up -d
 
 # Run Prisma migrations
-pnpm db:migratese
+pnpm db:migrate
 
 # Seed database with demo data
 pnpm db:seed
