@@ -593,24 +593,12 @@ pnpm test
 pnpm build:prod
 ```
 
-### Environment Variables
-
-Create `.env` file in root:
-
-```env
-# Backend
-PORT=3000
-NODE_ENV=development
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/product_reviews_db
-JWT_SECRET=your-secret-key
-JWT_EXPIRES_IN=15m
-FRONTEND_URL=http://localhost:4200
-```
 
 Notes:
 
 - **Token storage**: the frontend stores the JWT access token in **localStorage** (simple for a demo). For a real product I would use **httpOnly cookies** + refresh tokens to reduce XSS risk.
 - **Secrets**: do not commit real secrets. In production I would use a secret manager.
+- **One env source**: I keep only **root `.env`** as the source of truth. The backend reads `../../.env`. For Prisma commands inside `apps/backend`, the setup script creates a symlink `apps/backend/.env` → `../../.env`.
 
 ### Code Style
 
