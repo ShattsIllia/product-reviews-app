@@ -8,9 +8,9 @@ export default defineConfig({
     webServer: [
         {
             command: 'pnpm -s --filter @product-reviews/backend dev',
-            url: 'http://localhost:3000/api/products',
+            url: 'http://localhost:3000/api/v1/products',
             reuseExistingServer: true,
-            timeout: 120_000,
+            timeout: 180_000,
             cwd: '../..',
         },
         {
@@ -18,7 +18,7 @@ export default defineConfig({
             command: 'pnpm -s --filter @product-reviews/frontend start',
             url: 'http://localhost:4200',
             reuseExistingServer: true,
-            timeout: 120_000,
+            timeout: 180_000,
             cwd: '../..',
         },
     ],
