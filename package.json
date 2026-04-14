@@ -1,0 +1,43 @@
+{
+  "name": "product-reviews-app",
+  "version": "1.0.0",
+  "description": "Production-quality Product Reviews system - Angular + NestJS + PostgreSQL",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "start": "pnpm --filter=backend start",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "test:watch": "pnpm -r test -- --watch",
+    "test:cov": "pnpm -r test -- --coverage",
+    "e2e": "pnpm --filter=frontend e2e",
+    "e2e:ui": "pnpm --filter=frontend e2e -- --ui",
+    "db:migrate": "pnpm --filter=backend prisma:migrate",
+    "db:migrate:prod": "pnpm --filter=backend prisma:deploy",
+    "db:seed": "pnpm --filter=backend prisma:seed",
+    "db:reset": "pnpm --filter=backend exec prisma migrate reset --force",
+    "db:studio": "pnpm --filter=backend prisma:studio",
+    "lint": "pnpm -r lint",
+    "format": "pnpm -r format",
+    "format:check": "pnpm -r format -- --check",
+    "clean": "pnpm -r clean",
+    "type-check": "pnpm -r type-check"
+  },
+  "workspaces": [
+    "apps/backend",
+    "apps/frontend",
+    "packages/shared-types"
+  ],
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=8.13.0"
+  },
+  "devDependencies": {
+    "@nx/eslint": "^22.6.4",
+    "@nx/workspace": "^22.6.4",
+    "@types/jasmine": "^5.1.15",
+    "@types/jest": "^29.5.14",
+    "nx": "^22.6.4",
+    "typescript": "~5.5.4"
+  }
+}

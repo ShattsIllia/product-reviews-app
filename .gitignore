@@ -1,0 +1,34 @@
+
+.nx/installation
+.nx/cache
+.nx/workspace-data
+.nx/polygraph
+.claude/worktrees
+.claude/settings.local.json
+
+# Dependencies
+**/node_modules/**
+dist
+build
+.nx
+coverage
+/test-results
+**/test-results/**
+/playwright-report
+**/playwright-report/**
+.env.local
+.env.test
+.env.prod
+.env
+*.log
+package-lock.json
+.DS_Store
+.jest
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# Local-only agent skills (do not commit)
+.github/skills/
+.github/prompts/
+.github/agents/

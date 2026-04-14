@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-and-e2e:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: product_reviews_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres -d product_reviews_db"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    env:
+      CI: "true"
+      PORT: "3000"
+      NODE_ENV: "test"
+      FRONTEND_URL: "http://localhost:4200"
+      JWT_SECRET: "ci-secret"
+      JWT_EXPIRES_IN: "15m"
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/product_reviews_db?schema=public"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: "8"
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Prisma generate
+        run: pnpm --filter @product-reviews/backend prisma:generate
+
+      - name: Apply migrations
+        run: pnpm db:migrate:prod
+
+      - name: Seed database
+        run: pnpm db:seed
+
+      - name: Type check
+        run: pnpm type-check
+
+      - name: Unit + integration tests
+        run: pnpm test
+
+      - name: Install Playwright browsers
+        run: pnpm --filter @product-reviews/frontend exec playwright install --with-deps
+
+      - name: E2E tests (Playwright)
+        run: pnpm e2e
+

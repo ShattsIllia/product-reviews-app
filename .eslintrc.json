@@ -1,0 +1,11 @@
+{
+    "extends": [
+        "prettier"
+    ],
+    "ignorePattern": [
+        "dist",
+        "node_modules",
+        "build",
+        "coverage"
+    ]
+}
