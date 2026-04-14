@@ -4,12 +4,12 @@ import { ProductCatalogComponent } from './pages/product-catalog/product-catalog
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 
 const routes: Routes = [
-    { path: '', component: ProductCatalogComponent },
-    { path: ':id', component: ProductDetailComponent },
+  { path: '', component: ProductCatalogComponent },
+  { path: ':id', component: ProductDetailComponent },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class ProductsRoutingModule { }
+export class ProductsRoutingModule {}

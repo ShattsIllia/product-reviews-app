@@ -1,6 +1,7 @@
 import { ProductService } from '../../src/features/products/product.service';
 import { ProductRepository } from '../../src/features/products/product.repository';
 import { NotFoundException } from '../../src/common/exceptions/app.exception';
+import type { Product } from '@prisma/client';
 
 describe('ProductService (unit)', () => {
     let service: ProductService;
@@ -18,7 +19,7 @@ describe('ProductService (unit)', () => {
 
     it('getProducts: passes pagination + filters to repository', async () => {
         productRepository.findMany.mockResolvedValue({
-            products: [{ id: 'p1' } as any],
+            products: [{ id: 'p1' } as unknown as Product],
             total: 1,
         });
 
@@ -36,7 +37,10 @@ describe('ProductService (unit)', () => {
     });
 
     it('getCategories: returns distinct category list', async () => {
-        productRepository.findCategories.mockResolvedValue([{ category: 'Books' }, { category: 'Electronics' }] as any);
+        productRepository.findCategories.mockResolvedValue([
+          { category: 'Books' },
+          { category: 'Electronics' },
+        ]);
 
         const res = await service.getCategories();
 

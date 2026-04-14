@@ -1,6 +1,8 @@
 import { UserService } from '../../src/features/users/user.service';
 import { UserRepository } from '../../src/features/users/user.repository';
 import { BadRequestException, NotFoundException } from '../../src/common/exceptions/app.exception';
+import type { User } from '@prisma/client';
+import { UpdateUserDto } from '@app/shared/dto/user.dto';
 
 describe('UserService (unit)', () => {
     let service: UserService;
@@ -34,9 +36,11 @@ describe('UserService (unit)', () => {
             emailVerificationExpiresAt: null,
             createdAt: new Date(),
             updatedAt: new Date(),
-        } as any);
+        } satisfies User);
 
-        await expect(service.updateUser('u1', {} as any)).rejects.toBeInstanceOf(BadRequestException);
+        await expect(service.updateUser('u1', {} satisfies UpdateUserDto)).rejects.toBeInstanceOf(
+          BadRequestException
+        );
     });
 
     it('updateUser: updates displayName/avatarUrl and returns profile payload', async () => {
@@ -52,9 +56,12 @@ describe('UserService (unit)', () => {
             emailVerificationExpiresAt: null,
             createdAt: new Date(),
             updatedAt: new Date(),
-        } as any);
+        } satisfies User);
 
-        const res = await service.updateUser('u1', { displayName: 'New', avatarUrl: 'x' } as any);
+        const res = await service.updateUser(
+          'u1',
+          { displayName: 'New', avatarUrl: 'x' } satisfies UpdateUserDto
+        );
 
         expect(userRepository.update).toHaveBeenCalledWith('u1', {
             displayName: 'New',

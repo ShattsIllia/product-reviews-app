@@ -11,4 +11,3 @@ export class PricePipe implements PipeTransform {
     return `${currencySymbol}${value.toFixed(2)}`;
   }
 }
-

@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { ReviewFormComponent } from './review-form.component';
 import { ReviewService } from '../../services/review.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import type { ReviewModel } from '../../../../core/models/models';
 
 describe('ReviewFormComponent', () => {
   let component: ReviewFormComponent;
@@ -46,7 +47,14 @@ describe('ReviewFormComponent', () => {
 
   it('submits valid review and emits reviewAdded', () => {
     const emitSpy = spyOn(component.reviewAdded, 'emit');
-    reviewService.createReview.and.returnValue(of({ id: 'r1' } as any));
+    const createdReview: ReviewModel = {
+      id: 'r1',
+      userId: 'u1',
+      productId: 'p1',
+      rating: 5,
+      comment: 'ok',
+    };
+    reviewService.createReview.and.returnValue(of(createdReview));
 
     component.form.patchValue({ rating: 5, comment: 'ok' });
     component.onSubmit();

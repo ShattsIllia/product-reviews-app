@@ -40,6 +40,7 @@ export function mapReviewDto(r: ReviewDto): ReviewModel {
 }
 
 export function mapProductDto(p: ProductDto): ProductModel {
+  const reviews = (p as unknown as { reviews?: ReviewDto[] }).reviews;
   return {
     id: p.id,
     slug: p.slug,
@@ -52,7 +53,7 @@ export function mapProductDto(p: ProductDto): ProductModel {
     reviewCount: p.reviewCount ?? 0,
     createdAt: toDate(p.createdAt),
     updatedAt: toDate(p.updatedAt),
-    reviews: Array.isArray((p as any).reviews) ? (p as any).reviews.map(mapReviewDto) : undefined,
+    reviews: Array.isArray(reviews) ? reviews.map(mapReviewDto) : undefined,
   };
 }
 

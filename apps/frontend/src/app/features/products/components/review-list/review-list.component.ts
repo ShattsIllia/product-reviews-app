@@ -13,13 +13,7 @@ import type { ReviewModel, UserModel } from '../../../../core/models/models';
 @Component({
   selector: 'app-review-list',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatDialogModule,
-  ],
+  imports: [CommonModule, MatIconModule, MatButtonModule, MatSnackBarModule, MatDialogModule],
   templateUrl: './review-list.component.html',
   styleUrls: ['./review-list.component.scss'],
 })
@@ -54,33 +48,33 @@ export class ReviewListComponent {
       width: '400px',
       data: {
         title: 'Delete Review',
-        message: 'Are you sure you want to delete this review?'
-      }
+        message: 'Are you sure you want to delete this review?',
+      },
     });
 
     dialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((confirmed) => {
-      if (!confirmed) {
-        return;
-      }
+        if (!confirmed) {
+          return;
+        }
 
-      this.reviewService
-        .deleteReview(reviewId)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe({
-          next: () => {
-            this.snackBar.open('Review deleted', 'Close', { duration: 3000 });
-            this.reviewDeleted.emit(reviewId);
-          },
-          error: (error: unknown) => {
-            const message =
-              (error as { error?: { message?: string } } | null | undefined)?.error?.message ||
-              'Error deleting review';
-            this.snackBar.open(message, 'Close', { duration: 5000 });
-          },
-        });
-    });
+        this.reviewService
+          .deleteReview(reviewId)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe({
+            next: () => {
+              this.snackBar.open('Review deleted', 'Close', { duration: 3000 });
+              this.reviewDeleted.emit(reviewId);
+            },
+            error: (error: unknown) => {
+              const message =
+                (error as { error?: { message?: string } } | null | undefined)?.error?.message ||
+                'Error deleting review';
+              this.snackBar.open(message, 'Close', { duration: 5000 });
+            },
+          });
+      });
   }
 }

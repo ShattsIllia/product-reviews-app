@@ -4,9 +4,7 @@ type DeepPartial<T> = {
     [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];
 };
 
-export type PrismaMock = {
-    [K in keyof PrismaClient]?: any;
-};
+export type PrismaMock = DeepPartial<PrismaClient>;
 
 export function createPrismaMock(overrides: DeepPartial<PrismaMock> = {}): PrismaMock {
     const base: PrismaMock = {

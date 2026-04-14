@@ -2,7 +2,7 @@
     "extends": [
         "prettier"
     ],
-    "ignorePattern": [
+    "ignorePatterns": [
         "dist",
         "node_modules",
         "build",

@@ -33,4 +33,3 @@ export class ProductReviewsController {
     return this.reviewService.upsertReview(user.id, productId, dto);
   }
 }
-

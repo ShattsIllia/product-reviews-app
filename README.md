@@ -1159,22 +1159,6 @@ To call protected endpoints, first login to get `accessToken`, then click **Auth
 - Smaller bundle sizes
 - Easier tree-shakeable
 
----
-
-## 📝 Commit Message Convention
-
-Follow [Conventional Commits](https://www.conventionalcommits.org/):
-
-```
-feat(auth): add JWT token refresh endpoint
-fix(reviews): correct rating calculation
-docs(readme): update setup instructions
-test(products): add pagination tests
-chore(deps): upgrade Angular to 18.1
-```
-
----
-
 ## 🤝 Contributing
 
 ### Code Quality Standards

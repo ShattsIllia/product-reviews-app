@@ -152,7 +152,11 @@ export class ReviewService {
         const review = await this.getReviewOrThrowTx(tx, reviewId);
         this.assertOwnership(review, userId, 'delete');
 
-        const deleted = await this.reviewRepository.deleteByIdOptimisticTx(tx, reviewId, review.updatedAt);
+        const deleted = await this.reviewRepository.deleteByIdOptimisticTx(
+          tx,
+          reviewId,
+          review.updatedAt
+        );
         if (!deleted) {
           throw new OptimisticConflictError();
         }
@@ -162,10 +166,7 @@ export class ReviewService {
     });
   }
 
-  private async getReviewOrThrowTx(
-    tx: PrismaTransactionClient,
-    reviewId: string
-  ): Promise<Review> {
+  private async getReviewOrThrowTx(tx: PrismaTransactionClient, reviewId: string): Promise<Review> {
     const review = await this.reviewRepository.findByIdTx(tx, reviewId);
     if (!review) {
       throw new NotFoundException('Review not found');

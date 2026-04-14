@@ -128,7 +128,7 @@ pnpm e2e
 ```typescript
 describe('AuthService', () => {
   let service: AuthService;
-  let mockPrisma: any;
+  let mockPrisma: { user: { create: jest.Mock } };
 
   beforeEach(() => {
     mockPrisma = { user: { create: jest.fn() } };

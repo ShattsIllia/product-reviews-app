@@ -9,6 +9,11 @@ import {
 import { Request, Response } from 'express';
 import { AppException } from '../exceptions/app.exception';
 
+type HttpExceptionResponseShape = {
+  message?: string | string[];
+  errors?: Record<string, string>;
+};
+
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   private readonly logger = new Logger(AllExceptionsFilter.name);
@@ -29,9 +34,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
     } else if (exception instanceof HttpException) {
       statusCode = exception.getStatus();
       const exceptionResponse = exception.getResponse();
-      message = (exceptionResponse as any).message || exception.message;
-      if ((exceptionResponse as any).errors) {
-        errors = (exceptionResponse as any).errors;
+      const { message: exceptionMessage, errors: exceptionErrors } =
+        exceptionResponse as HttpExceptionResponseShape;
+      message = exceptionMessage ?? exception.message;
+      if (exceptionErrors) {
+        errors = exceptionErrors;
       }
     } else if (exception instanceof Error) {
       message = exception.message;

@@ -7,11 +7,9 @@ import { routes } from './app/app.routes';
 import { authInterceptor } from './app/core/interceptors/auth.interceptor';
 
 bootstrapApplication(AppComponent, {
-    providers: [
-        provideAnimations(),
-        provideRouter(routes),
-        provideHttpClient(
-            withInterceptors([authInterceptor])
-        ),
-    ],
+  providers: [
+    provideAnimations(),
+    provideRouter(routes),
+    provideHttpClient(withInterceptors([authInterceptor])),
+  ],
 }).catch((err) => console.error(err));

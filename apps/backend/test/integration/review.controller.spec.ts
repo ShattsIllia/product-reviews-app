@@ -1,4 +1,5 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
+import type { ExecutionContext } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
 import { AllExceptionsFilter } from '../../src/common/filters/all-exceptions.filter';
@@ -8,11 +9,13 @@ import { ReviewService } from '../../src/features/reviews/review.service';
 import { JwtAuthGuard } from '../../src/common/guards/jwt-auth.guard';
 
 class AllowAuthGuard {
-    canActivate(ctx: any) {
-        const req = ctx.switchToHttp().getRequest();
-        req.user = { id: 'u1', email: 'u1@example.com', role: 'USER' };
-        return true;
-    }
+  canActivate(ctx: ExecutionContext) {
+    const req = ctx.switchToHttp().getRequest<{
+      user?: { id: string; email: string; role: 'USER' | 'ADMIN' };
+    }>();
+    req.user = { id: 'u1', email: 'u1@example.com', role: 'USER' };
+    return true;
+  }
 }
 
 describe('ReviewController', () => {

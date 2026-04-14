@@ -18,7 +18,6 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) {}
 
-
   async register(dto: RegisterDto): Promise<RegistrationResponse> {
     const existingUser: User | null = await this.userRepository.findByEmail(dto.email);
 

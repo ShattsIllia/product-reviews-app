@@ -20,7 +20,7 @@ export class ProductRepository {
 
   async findMany(page: number = 1, limit: number = 10, search?: string, category?: string) {
     const skip = (page - 1) * limit;
-    const where: any = {};
+    const where: Prisma.ProductWhereInput = {};
 
     if (search) {
       where.OR = [

@@ -5,6 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserRepository } from '../../src/features/users/user.repository';
 import { UnauthorizedException } from '../../src/common/exceptions/app.exception';
 import * as bcrypt from 'bcryptjs';
+import { User } from '@prisma/client';
 
 describe('AuthService (unit)', () => {
     let service: AuthService;
@@ -38,7 +39,7 @@ describe('AuthService (unit)', () => {
             emailVerificationExpiresAt: null,
             createdAt: new Date(),
             updatedAt: new Date(),
-        } as any);
+        } satisfies User);
 
         const res = await service.register({ email: 'a@b.com', password: 'password123', displayName: 'A' });
 
@@ -48,7 +49,19 @@ describe('AuthService (unit)', () => {
     });
 
     it('register: returns same message if email already registered (enumeration prevention)', async () => {
-        userRepository.findByEmail.mockResolvedValue({ id: 'u1' } as any);
+        userRepository.findByEmail.mockResolvedValue({
+            id: 'u1',
+            email: 'a@b.com',
+            displayName: 'A',
+            avatarUrl: null,
+            role: 'USER',
+            passwordHash: 'hash',
+            emailVerified: false,
+            emailVerificationToken: null,
+            emailVerificationExpiresAt: null,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        } satisfies User);
 
         const res = await service.register({ email: 'a@b.com', password: 'password123', displayName: 'A' });
 
@@ -78,7 +91,7 @@ describe('AuthService (unit)', () => {
             emailVerificationExpiresAt: null,
             createdAt: new Date(),
             updatedAt: new Date(),
-        } as any);
+        } satisfies User);
 
         const res = await service.login({ email: 'a@b.com', password: 'password123' });
 
@@ -105,7 +118,7 @@ describe('AuthService (unit)', () => {
             emailVerificationExpiresAt: null,
             createdAt: new Date(),
             updatedAt: new Date(),
-        } as any);
+        } satisfies User);
 
         const res = await service.getProfile('u1');
 

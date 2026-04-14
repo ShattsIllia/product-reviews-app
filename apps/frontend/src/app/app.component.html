@@ -2,7 +2,9 @@
   <span class="logo" routerLink="/products">📦 Product Reviews</span>
   <span class="spacer"></span>
 
-  <ng-container *ngIf="isAuthenticated$ | async; then authenticated; else notAuthenticated"></ng-container>
+  <ng-container
+    *ngIf="isAuthenticated$ | async; then authenticated; else notAuthenticated"
+  ></ng-container>
 
   <ng-template #notAuthenticated>
     <button mat-button routerLink="/auth/login" class="auth-button">
@@ -20,12 +22,7 @@
       <mat-icon>shopping_bag</mat-icon>
       Products
     </button>
-    <button
-      mat-button
-      [matMenuTriggerFor]="userMenu"
-      data-testid="user-menu"
-      class="user-button"
-    >
+    <button mat-button [matMenuTriggerFor]="userMenu" data-testid="user-menu" class="user-button">
       <ng-container *ngIf="currentUser$ | async as user">
         <span class="user-label">
           <ng-container *ngIf="user.avatarUrl && !headerAvatarLoadFailed; else defaultAvatar">
@@ -62,4 +59,3 @@
 <div class="content-wrapper">
   <router-outlet></router-outlet>
 </div>
-

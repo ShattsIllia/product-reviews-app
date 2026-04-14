@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductCardComponent } from './product-card.component';
+import type { ProductModel } from '../../../../core/models/models';
 
 describe('ProductCardComponent', () => {
   let component: ProductCardComponent;
@@ -24,7 +25,7 @@ describe('ProductCardComponent', () => {
       reviewCount: 2,
       createdAt: new Date(),
       updatedAt: new Date(),
-    } as any;
+    } satisfies ProductModel;
     fixture.detectChanges();
   });
 
