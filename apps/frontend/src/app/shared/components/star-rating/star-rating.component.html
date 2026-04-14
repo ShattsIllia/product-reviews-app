@@ -1,0 +1,20 @@
+<div class="star-rating">
+  <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+    <!-- Full star -->
+    <mat-icon *ngIf="rating! >= star" class="star full"> star </mat-icon>
+
+    <!-- Half star -->
+    <div *ngIf="rating! >= star - 0.5 && rating! < star" class="star-half-wrapper">
+      <mat-icon class="star empty">star_outline</mat-icon>
+      <mat-icon class="star full-clipped">star</mat-icon>
+    </div>
+
+    <!-- Empty star -->
+    <mat-icon *ngIf="rating! < star - 0.5" class="star empty"> star_outline </mat-icon>
+  </ng-container>
+
+  <span class="rating-value" *ngIf="showValue && rating! > 0">
+    {{ rating!.toFixed(1) }} ({{ reviewCount }})
+  </span>
+</div>
+

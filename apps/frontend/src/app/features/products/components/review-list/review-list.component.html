@@ -1,0 +1,28 @@
+<div class="reviews-list">
+  <div class="review-item" *ngFor="let review of reviews" data-testid="review-item">
+    <div class="review-header">
+      <div class="user-info">
+        <div class="avatar">{{ review.user?.displayName?.charAt(0) }}</div>
+        <div>
+          <h4>{{ review.user?.displayName || 'Anonymous' }}</h4>
+          <span class="date">{{ review.createdAt | date: 'short' }}</span>
+        </div>
+      </div>
+      <div class="review-rating">
+        <span *ngFor="let i of [1, 2, 3, 4, 5]">
+          <mat-icon [class.filled]="i <= review.rating">star</mat-icon>
+        </span>
+      </div>
+    </div>
+
+    <p class="review-comment">{{ review.comment }}</p>
+
+    <div class="review-actions" *ngIf="isOwner(review)">
+      <button mat-button color="warn" (click)="deleteReview(review.id)">
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,65 @@
+<mat-toolbar color="primary" sticky>
+  <span class="logo" routerLink="/products">📦 Product Reviews</span>
+  <span class="spacer"></span>
+
+  <ng-container *ngIf="isAuthenticated$ | async; then authenticated; else notAuthenticated"></ng-container>
+
+  <ng-template #notAuthenticated>
+    <button mat-button routerLink="/auth/login" class="auth-button">
+      <mat-icon>login</mat-icon>
+      LOGIN
+    </button>
+    <button mat-button routerLink="/auth/register" class="auth-button">
+      <mat-icon>person_add</mat-icon>
+      REGISTER
+    </button>
+  </ng-template>
+
+  <ng-template #authenticated>
+    <button mat-button routerLink="/products">
+      <mat-icon>shopping_bag</mat-icon>
+      Products
+    </button>
+    <button
+      mat-button
+      [matMenuTriggerFor]="userMenu"
+      data-testid="user-menu"
+      class="user-button"
+    >
+      <ng-container *ngIf="currentUser$ | async as user">
+        <span class="user-label">
+          <ng-container *ngIf="user.avatarUrl && !headerAvatarLoadFailed; else defaultAvatar">
+            <img
+              class="header-avatar"
+              [src]="user.avatarUrl"
+              alt="Avatar"
+              (error)="onHeaderAvatarError()"
+              referrerpolicy="no-referrer"
+            />
+          </ng-container>
+          <ng-template #defaultAvatar>
+            <mat-icon>account_circle</mat-icon>
+          </ng-template>
+          <span class="user-name">{{ user.displayName || 'Profile' }}</span>
+        </span>
+      </ng-container>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/account/profile">
+        <mat-icon>person</mat-icon>
+        <span>My Profile</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </ng-template>
+</mat-toolbar>
+
+<div class="content-wrapper">
+  <router-outlet></router-outlet>
+</div>
+

@@ -1,0 +1,165 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+    color: #333;
+}
+
+/* Material Icons Font */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v142/flUhRq6tzZsQSRWFrZNQW6RS5Zg7o24-CLEElLdfPAw.woff2) format('woff2');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+}
+
+/* Material mat-icon component styling */
+.mat-icon,
+.mdc-icon-button .mat-icon {
+    font-family: 'Material Icons';
+    font-size: inherit;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Material Theme */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* Material Select Panel Override */
+.mat-mdc-select-panel {
+    z-index: 1000 !important;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.mat-mdc-select-panel-done-animating {
+    visibility: visible !important;
+}
+
+/* Global Material Overrides */
+.mat-mdc-card {
+    border-radius: 8px;
+
+    &:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+}
+
+.mat-mdc-button-base {
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+/* Form Styles */
+.mat-mdc-form-field {
+    width: 100%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+
+    &:hover {
+        background: #555;
+    }
+}
+
+/* Error Styles */
+.error-message {
+    color: #f44336;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+/* Success Styles */
+.success-message {
+    color: #4caf50;
+    font-size: 14px;
+    padding: 12px;
+    background-color: #e8f5e9;
+    border-radius: 4px;
+}
+
+/* Loading Styles */
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+/* Utility Classes */
+.mt-16 {
+    margin-top: 16px;
+}
+
+.mb-16 {
+    margin-bottom: 16px;
+}
+
+.p-16 {
+    padding: 16px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: #999;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .mat-mdc-toolbar {
+        padding: 8px 16px;
+    }
+}

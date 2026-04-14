@@ -1,0 +1,49 @@
+<div class="review-form-container">
+  <h3>Leave a Review</h3>
+
+  <div *ngIf="!isAuthenticated()" class="auth-message">
+    <mat-icon>lock</mat-icon>
+    <p>Please log in to leave a review</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="isAuthenticated()">
+    <div class="rating-input">
+      <label>Rating</label>
+      <div class="stars">
+        <button
+          *ngFor="let star of [1, 2, 3, 4, 5]"
+          mat-button
+          type="button"
+          (click)="setRating(star)"
+          [class.active]="form.get('rating')?.value >= star"
+          [attr.aria-label]="star + ' stars'"
+        >
+          <mat-icon>{{ form.get('rating')?.value >= star ? 'star' : 'star_outline' }}</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Comment (optional)</mat-label>
+      <textarea
+        matInput
+        formControlName="comment"
+        rows="4"
+        placeholder="Share your opinion about this product..."
+      ></textarea>
+      <mat-hint align="end">{{ form.get('comment')?.value?.length || 0 }}/500</mat-hint>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid || isLoading"
+      class="full-width"
+      data-testid="submit-review"
+    >
+      {{ isLoading ? 'Submitting...' : 'Submit Review' }}
+    </button>
+  </form>
+</div>
+

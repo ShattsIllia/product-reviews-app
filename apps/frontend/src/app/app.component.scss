@@ -1,0 +1,107 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+mat-toolbar {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 32px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+button[mat-button],
+a[mat-button],
+.auth-button {
+  text-transform: uppercase;
+  font-size: 14px;
+  margin: 0 8px;
+  color: white !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-weight: 500;
+  padding: 8px 16px !important;
+  border-radius: 4px !important;
+  transition: background 0.2s ease;
+}
+
+.user-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1;
+}
+
+.user-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.user-button mat-icon {
+  width: 26px;
+  height: 26px;
+  font-size: 26px;
+  line-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-name {
+  display: inline-block;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+button[mat-button]:hover,
+a[mat-button]:hover,
+.auth-button:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+router-outlet {
+  display: contents;
+}
+
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: auto;
+}
+

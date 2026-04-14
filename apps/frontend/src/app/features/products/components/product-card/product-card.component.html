@@ -1,0 +1,21 @@
+<mat-card class="product-card" *ngIf="product">
+  <div class="image-placeholder">
+    <img [src]="productImageUrl" [alt]="product?.name" />
+  </div>
+  <mat-card-content>
+    <h3>{{ product?.name }}</h3>
+    <p class="description">{{ truncate(product?.description || '', 60) }}</p>
+
+    <app-star-rating
+      [rating]="product?.averageRating"
+      [reviewCount]="product?.reviewCount || 0"
+      [showValue]="true"
+    >
+    </app-star-rating>
+
+    <div class="card-footer">
+      <span class="price">{{ product?.price | price }}</span>
+    </div>
+  </mat-card-content>
+</mat-card>
+

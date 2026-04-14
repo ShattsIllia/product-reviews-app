@@ -1,0 +1,47 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "module": "ESNext",
+        "target": "ES2022",
+        "lib": [
+            "ES2022",
+            "DOM"
+        ],
+        "declaration": false,
+        "declarationMap": false,
+        "sourceMap": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strictBindCallApply": true,
+        "strictPropertyInitialization": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "baseUrl": "./src",
+        "paths": {
+            "@app/*": [
+                "./*"
+            ],
+            "@shared/*": [
+                "../../../packages/shared-types/src/*"
+            ],
+            "@shared": [
+                "../../../packages/shared-types/src/index.ts"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

@@ -1,0 +1,93 @@
+.review-form-container {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+
+  h3 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    color: #333;
+  }
+}
+
+.auth-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+  background: #fff3cd;
+  border-radius: 8px;
+  color: #856404;
+  text-align: center;
+
+  mat-icon {
+    color: #ff9800;
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rating-input {
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .stars {
+    display: flex;
+    gap: 4px;
+
+    button {
+      padding: 0;
+      min-width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &:not(.active) mat-icon {
+        color: #ccc;
+      }
+
+      &.active mat-icon {
+        color: #ffc107;
+      }
+
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+}
+
