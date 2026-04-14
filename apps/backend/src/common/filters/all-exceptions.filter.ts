@@ -14,6 +14,12 @@ type HttpExceptionResponseShape = {
   errors?: Record<string, string>;
 };
 
+function toMessage(value: string | string[] | undefined, fallback: string): string {
+  if (typeof value === 'string' && value.length) return value;
+  if (Array.isArray(value) && value.length) return value.join(', ');
+  return fallback;
+}
+
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   private readonly logger = new Logger(AllExceptionsFilter.name);
@@ -36,7 +42,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       const exceptionResponse = exception.getResponse();
       const { message: exceptionMessage, errors: exceptionErrors } =
         exceptionResponse as HttpExceptionResponseShape;
-      message = exceptionMessage ?? exception.message;
+      message = toMessage(exceptionMessage, exception.message);
       if (exceptionErrors) {
         errors = exceptionErrors;
       }

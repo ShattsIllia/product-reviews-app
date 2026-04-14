@@ -21,9 +21,7 @@ export class ProductService {
     category?: string;
   }): Observable<Paginated<ProductModel>> {
     const { page = 1, limit = 12, search, category } = options || {};
-    let params = new HttpParams()
-      .set('page', String(page))
-      .set('limit', String(limit));
+    let params = new HttpParams().set('page', String(page)).set('limit', String(limit));
     if (search) params = params.set('search', search);
     if (category) params = params.set('category', category);
 
