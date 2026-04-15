@@ -100,26 +100,6 @@ export class ReviewRepository {
     });
   }
 
-  updateByIdTx(
-    tx: PrismaTransactionClient,
-    id: string,
-    rating: number,
-    comment: string | null | undefined
-  ) {
-    return tx.review.update({
-      where: { id },
-      data: {
-        rating,
-        comment: comment ?? null,
-      },
-      include: reviewWithAuthor,
-    });
-  }
-
-  deleteByIdTx(tx: PrismaTransactionClient, id: string) {
-    return tx.review.delete({ where: { id } });
-  }
-
   /**
    * Optimistic delete using the previously observed `updatedAt`.
    * Returns whether the row was deleted (count === 1).

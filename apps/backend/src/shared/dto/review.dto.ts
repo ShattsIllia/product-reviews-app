@@ -14,18 +14,3 @@ export class CreateReviewDto {
   @MaxLength(1000)
   comment?: string;
 }
-
-export class UpdateReviewDto {
-  @ApiPropertyOptional({ example: 4, minimum: 1, maximum: 5 })
-  @IsOptional()
-  @IsInt()
-  @Min(1)
-  @Max(5)
-  rating?: number;
-
-  @ApiPropertyOptional({ example: 'After one week: still good.' })
-  @IsOptional()
-  @IsString()
-  @MaxLength(1000)
-  comment?: string;
-}
