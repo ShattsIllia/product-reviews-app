@@ -6,7 +6,7 @@ import { ReviewRepository } from './review.repository';
 import { ProductRepository } from '../products/product.repository';
 import { ProductRatingService } from '../products/product-rating.service';
 import { CreateReviewDto } from '@app/shared/dto/review.dto';
-import { NotFoundException, ForbiddenException } from '../../common/exceptions/app.exception';
+import { NotFoundException, ConflictException, ForbiddenException } from '../../common/exceptions/app.exception';
 
 type ReviewWithAuthor = Prisma.ReviewGetPayload<{
   include: {
@@ -68,7 +68,7 @@ export class ReviewService {
         throw e;
       }
     }
-    throw new ForbiddenException('Review was updated concurrently. Please retry.');
+    throw new ConflictException('Review was updated concurrently. Please retry.');
   }
 
   private async requireProductTx(tx: PrismaTransactionClient, productId: string): Promise<void> {

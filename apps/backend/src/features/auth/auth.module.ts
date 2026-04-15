@@ -13,13 +13,16 @@ import { UsersModule } from '../users/users.module';
     ConfigModule,
     PassportModule,
     UsersModule,
-    ThrottlerModule.forRoot(),
+    ThrottlerModule.forRoot([
+      { name: 'short', ttl: 60_000, limit: 5 },
+      { name: 'long', ttl: 900_000, limit: 20 },
+    ]),
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService): JwtModuleOptions => ({
-        secret: configService.get<string>('JWT_SECRET'),
+        secret: configService.get<string>('jwt.secret'),
         signOptions: {
-          expiresIn: Number(configService.get<string>('JWT_EXPIRES_IN')) || 900,
+          expiresIn: (configService.get('jwt.expiresIn')) ?? '15m',
         },
       }),
     }),
